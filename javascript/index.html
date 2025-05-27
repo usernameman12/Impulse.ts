@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Impulse Physics Example Usage</title>
+  <style>
+    body { margin: 0; overflow: hidden; background: #111; }
+    .ball {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background: #0bf;
+      border-radius: 50%;
+      left: 100px;
+      top: 100px;
+    }
+  </style>
+</head>
+<body>
+  <div class="ball" data-radius="20"></div>
+  <div class="ball" style="left:200px" data-radius="20"></div>
+
+  <script src="vector.js"></script>
+  <script src="body.js"></script>
+  <script src="force.js"></script>
+  <script src="world.js"></script>
+  <script src="collision.js"></script>
+  <script src="integrator.js"></script>
+  <script src="utils.js"></script>
+
+  <script>
+    const world = new World();
+    world.addForce(Forces.applyGravity);
+
+    document.querySelectorAll('.ball').forEach(div => {
+      const body = new Body(div);
+      world.addBody(body);
+    });
+
+    startLoop(world, 1 / 60);
+  </script>
+</body>
+</html>
